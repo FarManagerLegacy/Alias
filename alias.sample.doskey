@@ -1,0 +1,80 @@
+[far.exe]
+
+;==Alias
+a=alias:$*
+rr=alias:/file $*
+unalias=alias:$*=
+aa=edit:<DOSKEY /M:all 
+
+;==Calc in cmdline
+==moon:print '= '..((f)->(setfenv f,setmetatable {},{__index:(t,k)->_G[k] or _G.math[k]})!) -> $*
+
+;== luamacro
+ll=lm:load $*
+pluginsr=hh.exe "mk:@MSITStore:%FARHOME%\Encyclopedia\FarEncyclopedia.ru.chm::/html/macro/macrocmd/prop_func/index.html"
+luafar="%FARHOME%\Encyclopedia\luafar_manual.chm"
+macroapi="%FARHOME%\Encyclopedia\macroapi_manual.ru.chm"
+lua=lua51x.exe $*
+
+;==Everything==
+Everything=C:\APPS\Disk\Everything\Everything.exe $*
+es=C:\APPS\Disk\Everything\es.exe $*
+ee=tmp:-menu +replace <C:\APPS\Disk\Everything\es.exe -n 1000 $*
+
+;==scripts==
+mount=tmp:+menu<for /f "skip=15 tokens=*" %q in ('mountvol')do @echo %q
+un=lua:@"%FARPROFILE%\Macros\utils\un.lua"
+changelog=gh api -X GET repos/FarGroup/FarManager/commits?per_page=10 --jq ".[].commit | \"-\"*45, ([.author.date, .author.name] |@tsv), .message, """""
+
+;== Open and filter "File associations" menu
+ass=lua:Keys "F9 c a RAlt" mf.print "$*"
+
+
+[cmd.exe]
+kill=taskkill /f /im $*
+ipdebug=ipconfig /release&ipconfig /flushdns&ipconfig /renew&ipconfig /registerdns
+
+;==Power management
+reboot=shutdown -r -t 0$* -c "Компьютер будет перезагружен"
+logoff=shutdown -l
+poweroff=shutdown -s -t 0$* -c "Компьютер будет выключен"
+lock=%SystemRoot%\system32\rundll32.exe USER32.DLL,LockWorkStation
+
+;==Sysinternals==
+dbgview=C:\APPs\Service\Sysinternals\Dbgview.exe
+procexp=C:\APPs\Service\Sysinternals\procexp.exe
+procmon=C:\APPs\Service\Sysinternals\Procmon.exe
+Tcpview=C:\APPs\Service\Sysinternals\Tcpview.exe 
+
+;==Unixish
+man=if /i "$*" neq "" start hh ntcmds.chm::/$*.htm
+ls=dir /d $*
+cp=copy $*
+mv=move $*
+rm=del /p $*
+
+;= Directory navigation
+up=cd ..
+pd=pushd $*
+
+c=chdir c:
+d=chdir d:
+e=chdir e:
+f=chdir f:
+g=chdir g:
+h=chdir h:
+i=chdir i:
+j=chdir j:
+k=chdir k:
+l=chdir l:
+x=chdir x:
+
+tmp=chdir "%TMP%"
+temp=chdir "%TEMP%"
+
+desktop=goto:"%USERPROFILE%\Рабочий стол"
+HOME=goto:"%HOMEDRIVE%%HOMEPATH%\Local Settings"
+
+;==WWW==
+IMDb=start "" "https://www.imdb.com/find?s=all&q=$*"
+translate=start "" "https://translate.yandex.ru/?lang=en-ru&text=$*"
